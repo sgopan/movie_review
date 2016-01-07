@@ -1,0 +1,37 @@
+<%= form_for([@movie, @review]) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<div class="panel-body">
+		<div class="form-group">
+      	<%= f.label :rating %><br>
+        <div id="star-rating"></div>    
+    </div>
+    <div class="form-group">
+      	<%= f.label :comment %><br>
+        <%= f.text_area :comment, class: "form-control" %>      
+    </div>
+    	
+    <div class="form-group">
+      	<%= f.button :Submit  ,class: "btn btn-primary" %><br>         
+    </div>
+	</div>
+    
+  
+<% end %>
+<script>
+  $('#star-rating').raty({
+    path: '/assets/',
+    scoreName : 'review[rating]'
+  });
+</script>
